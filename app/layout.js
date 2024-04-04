@@ -1,4 +1,5 @@
 
+import Link from "next/link";
 import "./globals.css";
 
 
@@ -12,12 +13,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <header className="bg-black px-[70px] py-[30px] text-white flex justify-between">
+        <header className="bg-primary-100 text-[20px] px-[70px] py-[30px] text-white flex justify-between">
             <div>
                 <h1>Logo</h1>
             </div>
             <div>
-              <button>Login</button>
+              <Link href="/login">Login</Link>
+             
               <button>Register</button>
               
             </div>
