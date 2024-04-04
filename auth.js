@@ -3,11 +3,12 @@ import {authConfig} from "./auth.config.js";
 import {PrismaClient} from "@prisma/client";
 import Credentials from "next-auth/providers/credentials";
 
-const primsa = new PrismaClient()
+
 
 
 async function getUser(email, nickname){
     try{
+        const prisma = new PrismaClient()
         const user = await prisma.user.findFirst({
             where:{
                 or:[
@@ -28,7 +29,8 @@ export const {handlers:{GET,POST}, auth, signIn, signOut} = NextAuth({
     providers:[
         Credentials({
             async authorize(credentials){
-                const user = await getUser(credentials.data.email, credentials.data.nickname);
+                console.log(credentials)
+                const user = await getUser(credentials.email, credentials.nickname);
                 console.log(user)
                 if(user){
                     return user;

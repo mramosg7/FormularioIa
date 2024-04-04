@@ -17,19 +17,17 @@ export async function authenticate(
     prevState,
     formData,
   ){
-
-
     try{
       console.log(formData)
-      await signIn('Credentials', formData);
+      await signIn('credentials', formData);
     }catch (error) {
-      if (error instanceof AuthError) {
+     
         switch (error.type) {
           case 'CredentialsSignin':
             return 'Invalid credentials.';
           default:
             return 'Something went wrong.';
-        }
+        
       }
       throw error;
     }

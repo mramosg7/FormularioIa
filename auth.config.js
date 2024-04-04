@@ -1,6 +1,6 @@
 export const authConfig = {
     pages: {
-        login:"/login",
+        signIn:"/login",
         register:"/register",
         logout:"/"
     },

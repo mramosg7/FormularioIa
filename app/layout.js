@@ -18,9 +18,11 @@ export default function RootLayout({ children }) {
                 <h1>Logo</h1>
             </div>
             <div>
+              <Link href="/dashboard">Home</Link>
               <Link href="/login">Login</Link>
              
               <button>Register</button>
+              <button>Logout</button>
               
             </div>
         </header>

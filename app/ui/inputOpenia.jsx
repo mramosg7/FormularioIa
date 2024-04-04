@@ -21,7 +21,7 @@ const [errorMesagge, dispatch] = useFormState(generateForm, undefined);
    
     return (
       <button className="bg-primary-100 rounded mt-2 text-white p-1" aria-disabled={pending}>
-        Crear
+        {pending ? 'Generating...' : 'Generate'}
       </button>
     );
   }
