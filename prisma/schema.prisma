@@ -16,44 +16,56 @@ datasource db {
 // schema.prisma
 
 // Define el modelo Plan
-model Plan {
+model plan {
   id          String     @id @default(uuid()) @map("id") // Mapea a UUID en la base de datos
   descripcion String
+
+   usuarios    usuario[]  
 }
 
 // Define el modelo Usuario
-model Usuario {
+model usuario {
   id       String    @id @default(uuid()) @map("id") // Mapea a UUID en la base de datos
   nombre   String
   nick     String
   email    String
-  plan     Plan      @relation(fields: [planId], references: [id])
+  plan     plan      @relation(fields: [planId], references: [id])
   planId   String
+  formularios formulario[]
 }
 
 // Define el modelo Formulario
-model Formulario {
+model formulario {
   id          String    @id @default(uuid()) @map("id") // Mapea a UUID en la base de datos
-  usuario     Usuario   @relation(fields: [usuarioId], references: [id])
+  usuario     usuario   @relation(fields: [usuarioId], references: [id])
   usuarioId   String
   name        String
   description String
+  preguntasFormulario preguntaFormulario[]
+
+
+
 }
 
 // Define el modelo tipoPregunta
 model tipoPregunta {
   id          String    @id @default(uuid()) @map("id") // Mapea a UUID en la base de datos
   descripcion String
+  preguntasFormulario preguntaFormulario []
 }
 
 // Define el modelo preguntaFormulario
 model preguntaFormulario {
   id          String    @id @default(uuid()) @map("id") // Mapea a UUID en la base de datos
-  formulario  Formulario @relation(fields: [formularioId], references: [id])
+  formulario  formulario @relation(fields: [formularioId], references: [id])
   formularioId String
   texto       String
   tipo        tipoPregunta @relation(fields: [tipoId], references: [id])
   tipoId      String
+
+  opcionesPregunta opcionPregunta[]
+
+ 
 }
 
 // Define el modelo opcionPregunta
@@ -63,4 +75,6 @@ model opcionPregunta {
   preguntaId String
   text     String
   value    String
+
+
 }

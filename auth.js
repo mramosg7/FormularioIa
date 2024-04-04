@@ -6,15 +6,13 @@ import Credentials from "next-auth/providers/credentials";
 
 
 
-async function getUser(email, nickname){
+async function getUser(email){
     try{
+        console.log(email)
         const prisma = new PrismaClient()
-        const user = await prisma.user.findFirst({
+        const user = await prisma.usuario.findFirst({
             where:{
-                or:[
-                    {email},
-                    {nickname}
-                ]
+                email:email
             }
         });
         return user;
@@ -30,7 +28,7 @@ export const {handlers:{GET,POST}, auth, signIn, signOut} = NextAuth({
         Credentials({
             async authorize(credentials){
                 console.log(credentials)
-                const user = await getUser(credentials.email, credentials.nickname);
+                const user = await getUser(credentials.email);
                 console.log(user)
                 if(user){
                     return user;
