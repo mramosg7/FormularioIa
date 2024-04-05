@@ -41,37 +41,37 @@ model formulario {
   usuarioId   String
   name        String
   description String
-  preguntasFormulario preguntaFormulario[]
+  preguntasformulario preguntaformulario[]
 
 
 
 }
 
 // Define el modelo tipoPregunta
-model tipoPregunta {
+model tipopregunta {
   id          String    @id @default(uuid()) @map("id") // Mapea a UUID en la base de datos
   descripcion String
-  preguntasFormulario preguntaFormulario []
+  preguntasformulario preguntaformulario []
 }
 
 // Define el modelo preguntaFormulario
-model preguntaFormulario {
+model preguntaformulario {
   id          String    @id @default(uuid()) @map("id") // Mapea a UUID en la base de datos
   formulario  formulario @relation(fields: [formularioId], references: [id])
   formularioId String
   texto       String
-  tipo        tipoPregunta @relation(fields: [tipoId], references: [id])
+  tipo        tipopregunta @relation(fields: [tipoId], references: [id])
   tipoId      String
 
-  opcionesPregunta opcionPregunta[]
+  opcionespregunta opcionpregunta[]
 
  
 }
 
 // Define el modelo opcionPregunta
-model opcionPregunta {
+model opcionpregunta {
   id       String            @id @default(uuid()) @map("id") // Mapea a UUID en la base de datos
-  pregunta preguntaFormulario @relation(fields: [preguntaId], references: [id])
+  pregunta preguntaformulario @relation(fields: [preguntaId], references: [id])
   preguntaId String
   text     String
   value    String

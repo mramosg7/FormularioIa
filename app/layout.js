@@ -1,6 +1,8 @@
 
 import Link from "next/link";
 import "./globals.css";
+import { signOut } from "@/auth";
+import { SessionProvider } from 'next-auth/react'
 
 
 
@@ -20,13 +22,23 @@ export default function RootLayout({ children }) {
             <div>
               <Link href="/dashboard">Home</Link>
               <Link href="/login">Login</Link>
-             
-              <button>Register</button>
-              <button>Logout</button>
+              <form
+                action={async () => {
+                  'use server';
+                  
+                  await signOut();
+                }}
+              >
+                <button className="bg-primary-200 p-2"><div>Logout</div></button>
+              </form>
+              
+              
               
             </div>
         </header>
+        <SessionProvider>
         {children}
+        </SessionProvider>
         
       </body>
     </html>

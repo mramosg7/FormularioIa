@@ -2,13 +2,17 @@ import NextAuth from "next-auth";
 import {authConfig} from "./auth.config.js";
 import {PrismaClient} from "@prisma/client";
 import Credentials from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+import nookies from 'nookies'
+import { parseCookies } from 'nookies';
 
-
-
+async function createForm(form, userid){
+    
+}
 
 async function getUser(email){
     try{
-        console.log(email)
+        
         const prisma = new PrismaClient()
         const user = await prisma.usuario.findFirst({
             where:{
@@ -22,20 +26,25 @@ async function getUser(email){
       }
 }
 
-export const {handlers:{GET,POST}, auth, signIn, signOut} = NextAuth({
+export const { handlers:{GET,POST}, auth, signIn, signOut} = NextAuth({
     ...authConfig,
     providers:[
         Credentials({
             async authorize(credentials){
                 console.log(credentials)
                 const user = await getUser(credentials.email);
-                console.log(user)
+                      
                 if(user){
+                    console.log(user)
                     return user;
                 }else{
                     return null;
                 }
             }
-        })
+        }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_SECRET_ID
+          })
     ]
 });
