@@ -1,8 +1,10 @@
 import { PrismaClient } from '@prisma/client';
 
-export async function createForm(form, userid){
+export async function createForm(formS, userid){
     try{
         const prisma = new PrismaClient();
+        const form = JSON.parse(formS)
+       
         const newForm = await prisma.formulario.create({
             data:{
                 usuarioId:userid,
@@ -12,11 +14,13 @@ export async function createForm(form, userid){
         })
         
         form.questions.forEach(async (question) => {
+           
             const tipo = await prisma.tipopregunta.findFirst({
                 where:{
                     descripcion:question.fieldType
                 }
             })
+        
             const newQuestion = await prisma.preguntaformulario.create({
                 data:{
                     formularioId:newForm.id,
@@ -37,7 +41,7 @@ export async function createForm(form, userid){
                 })
             }
         })
-        
+        return newForm.id
     }catch (error) {
         console.error('Failed to create form:', error);
         throw new Error('Failed to create form.');

@@ -4,6 +4,23 @@ import {fetchChat} from './openai/openai.js';
 import { redirect } from 'next/navigation.js';
 import { createForm } from './forms/forms.js';
 import { AuthError } from 'next-auth';
+import { PrismaClient } from '@prisma/client';
+
+export async function getIdUser(email){
+ 
+  try{
+    const prisma = new PrismaClient();
+    const user = await prisma.usuario.findFirst({
+      where: {
+        email: email
+      }
+    })
+ 
+    return user.id
+  }catch(e){
+    throw e
+  }
+}
 
 export async function generateForm(
     prevState,
@@ -11,10 +28,12 @@ export async function generateForm(
   ){
     
     const text = formData.get('text');
-    const userid = formData.get('userid');
+    const email = formData.get('email');
+
+    const id = await getIdUser(email)
     
     const data = await fetchChat(text)
-    const idForm = await createForm(data, userid)
+    const idForm = await createForm(data, id)
     
     
     redirect('/dashboard/forms/edit/' + idForm)
