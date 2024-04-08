@@ -1,6 +1,6 @@
 'use client'
 import { useFormState, useFormStatus } from 'react-dom';
-import { generateForm } from '../lib/actions.js';
+import { generateForm } from '../../lib/actions.js';
 import { useSession } from 'next-auth/react';
 
 export function InputOpenia ({setView})  {

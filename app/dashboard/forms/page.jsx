@@ -1,13 +1,19 @@
 'use client'
-import InputOpenia from "@/app/ui/inputOpenia";
-import { useState } from "react";
+
+
+import ListadoForms from "@/app/ui/forms/listadoFormularios";
+import { useSession } from "next-auth/react";
+import BotonOpenIa from "@/app/ui/openia/botonOpenIa";
+
 
 export default function Forms(){
-    const [view, setView] = useState(false)
+    
+   const {data} = useSession()
+ 
     return(
         <div>
-            <button className="bg-primary-100 p-2 text-white" onClick={()=>{setView(true)}}>Crear un nuevo formulario</button>
-            {view && <InputOpenia setView={setView} />}
+            <BotonOpenIa />
+            {!!data?.user?.email && <ListadoForms email={data.user.email}/>}
         </div>
     )
 }
