@@ -17,7 +17,8 @@ export default async function Edit({params}){
                 
                 {formulario.preguntasformulario.map(pregunta => (
                     <div className='rounded' key={pregunta.id}>
-                        <h1 className="bg-secondary-200 p-2 text-[17px] rounded-t-lg">{pregunta.texto}</h1>
+                        <input type="text" className="bg-secondary-200 p-2 text-[17px] rounded-t-lg" value={pregunta.texto} />
+                       
                         {pregunta.tipo.descripcion === 'Textarea'&& <textarea className="border border-red-500"></textarea>}
                         {pregunta.tipo.descripcion === 'RadioGroup'&& (
                             pregunta.opcionespregunta.map(opciones => (

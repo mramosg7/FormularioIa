@@ -59,4 +59,43 @@ export async function authenticate(
   }
 
 
+
+  export async function exportarRespuesta(
+    prevState,
+    formData,
+  ){
+    try{
+      const prisma = new PrismaClient();
+      formData.forEach(async(value,id) => {
+        if (id.includes('textarea')){
+         await prisma.respuestausuario.create({
+            data: {
+              preguntaId: id.split('textarea-')[1],
+              respuesta: value
+            }
+          })
+        }else{
+          const opcion = await prisma.opcionpregunta.findFirst({
+            where: {
+              preguntaId: id,
+              text: value
+            }
+          })
+          await prisma.respuestausuario.create({
+            data: {
+              preguntaId: id,
+              opcionId: opcion.id
+            }
+          })
+        }
+      });
+      redirect('/formulario/confirmar')
+    }catch(e){
+      throw e
+    }
+    
+  }
+  
+
+
   

@@ -102,12 +102,19 @@ export async function getFormulario(id){
 export async function getQuestions(id){
     try{
         const prisma = new PrismaClient();
-        const questions = await prisma.preguntaformulario.findMany({
-            where:{
-                formularioId:id
-            }
-        })
-        return questions
+        const form = await prisma.formulario.findFirst({
+            where: { id: id },
+            include: {
+                preguntasformulario: {
+                include: {
+                    tipo: true,
+                    opcionespregunta: true,
+                    respuestasusuario: true,
+                },
+                },
+            },
+            })
+        return form
     }catch (error) {
         console.error('Failed to get questions:', error);
         throw new Error('Failed to get questions.');

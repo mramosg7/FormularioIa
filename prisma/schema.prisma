@@ -64,6 +64,7 @@ model preguntaformulario {
   tipoId      String
 
   opcionespregunta opcionpregunta[]
+  respuestasusuario respuestausuario[]
 
  
 }
@@ -76,5 +77,16 @@ model opcionpregunta {
   text     String
   value    String
 
+  respuestausuario respuestausuario[]
 
+}
+
+// Define el modelo respuestausuario
+model respuestausuario {
+  id          String     @id @default(uuid()) @map("id")
+  pregunta    preguntaformulario @relation(fields: [preguntaId], references: [id])
+  preguntaId  String
+  opcion      opcionpregunta? @relation(fields: [opcionId], references: [id])
+  opcionId    String?
+  respuesta   String?
 }

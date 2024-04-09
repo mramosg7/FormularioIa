@@ -3,12 +3,7 @@ import {authConfig} from "./auth.config.js";
 import {PrismaClient} from "@prisma/client";
 import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import nookies from 'nookies'
-import { parseCookies } from 'nookies';
 
-async function createForm(form, userid){
-    
-}
 
 async function getUser(email){
     try{
