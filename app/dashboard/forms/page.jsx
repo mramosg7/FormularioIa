@@ -1,7 +1,7 @@
 'use client'
 
 
-import ListadoForms from "@/app/ui/forms/listadoFormularios";
+import ListadoForms from "@/app/ui/dashboard/forms/listadoFormularios";
 import { useSession } from "next-auth/react";
 import BotonOpenIa from "@/app/ui/openia/botonOpenIa";
 

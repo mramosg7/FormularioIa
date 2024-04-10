@@ -1,6 +1,6 @@
 'use client'
 
-import { getFormularios } from "../../lib/forms/forms";
+import { getFormularios } from "../../../lib/forms/forms";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 

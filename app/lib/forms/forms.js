@@ -2,6 +2,7 @@
 
 import { PrismaClient } from '@prisma/client';
 
+
 export async function createForm(formS, userid){
     try{
         const prisma = new PrismaClient();
@@ -53,7 +54,7 @@ export async function createForm(formS, userid){
 
 export async function getFormularios(email){
     try{
-        console.log(email)
+    
         const prisma = new PrismaClient();
         const user = await prisma.usuario.findFirst({
             where:{
@@ -134,4 +135,51 @@ export async function getOptions(id){
         console.error('Failed to get options:', error);
         throw new Error('Failed to get options.');
       }
+}
+
+
+export const getLatestForms = async (email) => {
+    try{
+        const prisma = new PrismaClient();
+    const formulariosRecientes = await prisma.usuario.findMany({
+        where: {
+          email: email
+        },
+        select: {
+          formularios: {
+            orderBy: {
+              createdAt: 'desc'
+            },
+            take: 5
+          }
+        }
+      });
+      return formulariosRecientes
+    }catch(error){
+        console.error('Failed to get latest forms:', error);
+        throw new Error('Failed to get latest forms.');
+    }
+    
+      
+}
+
+
+export const getPopularForms = async (email) => {
+    try{
+        const prisma = new PrismaClient();
+        const formulariosMasRespondidos = await prisma.formulario.findMany({
+            select: {
+                id: true,
+                name: true,
+                description: true
+            },
+            take: 5
+          });
+        
+          console.log(formulariosMasRespondidos)
+          return formulariosMasRespondidos
+    }catch(error){
+        console.error('Failed to get popular forms:', error);
+        throw new Error('Failed to get popular forms.');
+    }
 }

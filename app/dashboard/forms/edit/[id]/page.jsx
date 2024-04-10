@@ -1,7 +1,7 @@
 
 
 import { getFormulario } from "@/app/lib/forms/forms"
-import BotonConfirmarEdicion from "@/app/ui/forms/botonConfirmarEdicion"
+import BotonConfirmarEdicion from "@/app/ui/dashboard/forms/botonConfirmarEdicion"
 
 export default async function Edit({params}){
    const formulario = await getFormulario(params.id)
