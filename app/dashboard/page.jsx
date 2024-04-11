@@ -16,8 +16,8 @@ export default async function Dashboard() {
                 <Buscador />
 
             </div>
-            <section id="formularios-recientes">
-                <h1>Formularios recientes</h1>
+            <section className="px-[60px]" id="formularios-recientes">
+                <h1 className="font-bold py-5 text-[32px]">Formularios recientes</h1>
                 <Suspense fallback={<h1>Cargando...</h1>}>
                     <FormulariosRecientes email={user?.email}/>
                 </Suspense>
