@@ -20,12 +20,10 @@ export default async function FormulariosRecientes({email}) {
                     }}>{form.description}</p>
                     </div>
                     <div className="w-[100%] rounded-b-lg bg-[#e5e5e5] flex">
-                        
-                            <BotonCopiar  id={'share'} text={'Copiar link'}><MdShare/></BotonCopiar>
-                        
-                       <Boton id={'edit'} text={'Editar formulario'} formId={form.id}><MdEdit/></Boton>
-                       <Boton formId={form.id} id={'stats'} text={'Ver estadisticas'}><MdQueryStats/></Boton>
-                       <Boton formId={form.id} id={'delete'} text={'Eliminar formulario'}><MdDeleteForever/></Boton>
+                        <BotonCopiar  id={'share'} text={'Copiar link'}><MdShare/></BotonCopiar>
+                        <Boton id={'edit'} text={'Editar formulario'} formId={form.id}><MdEdit/></Boton>
+                        <Boton formId={form.id} id={'stats'} text={'Ver estadisticas'}><MdQueryStats/></Boton>
+                        <Boton formId={form.id} id={'delete'} text={'Eliminar formulario'}><MdDeleteForever/></Boton>
                         
                     </div>
                 </div>

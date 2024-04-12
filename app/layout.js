@@ -15,27 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <header className="bg-primary-100 text-[20px] px-[70px] py-[30px] text-white flex justify-between">
-            <div>
-                <h1>Logo</h1>
-            </div>
-            <div>
-              <Link href="/dashboard">Home</Link>
-              <Link href="/login">Login</Link>
-              <form
-                action={async () => {
-                  'use server';
-                  
-                  await signOut();
-                }}
-              >
-                <button className="bg-primary-200 p-2"><div>Logout</div></button>
-              </form>
-              
-              
-              
-            </div>
-        </header>
+       
         <SessionProvider>
         {children}
         </SessionProvider>
