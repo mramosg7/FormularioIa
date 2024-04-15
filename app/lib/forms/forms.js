@@ -1,6 +1,7 @@
 'use server'
 
 import { PrismaClient } from '@prisma/client';
+import { redirect } from 'next/navigation.js';
 
 
 export async function createForm(formS, userid){
@@ -181,5 +182,41 @@ export const getPopularForms = async (email) => {
     }catch(error){
         console.error('Failed to get popular forms:', error);
         throw new Error('Failed to get popular forms.');
+    }
+}
+
+
+export const updateChanges = async (changes) => {
+    try{
+        const prisma =new PrismaClient();
+        const { preguntas, opciones } = changes
+        const preguntasIds = Object.keys(preguntas)
+        const opcionesIds = Object.keys(opciones)
+        
+        for (const id of preguntasIds) {
+            await prisma.preguntaformulario.update({
+                where: {
+                    id: id
+                },
+                data: {
+                    texto: preguntas[id]
+                }
+            });
+        }
+
+        for (const id of opcionesIds) {
+            await prisma.opcionpregunta.update({
+                where: {
+                    id: id
+                },
+                data: {
+                    text: opciones[id]
+                }
+            });
+        }
+        return null;
+    }catch(error){
+        console.error('Failed to update changes:', error);
+        throw new Error('Failed to update changes.');
     }
 }
