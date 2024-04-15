@@ -45,13 +45,7 @@ export default function Edit({params}){
                         {pregunta.tipo.descripcion === 'Select'&& (
                            <EditSelect pregunta={pregunta} id={pregunta.id} addChange={addChanges} changeOption={changeOption}/>
                         )}
-                        {pregunta.opcionespregunta.map(opciones => {
-                            
-                            <div key={opciones.id}>
-                                <h3>{opciones.text}</h3>
-                            </div>
-                        })}
-                       
+                        
                     </div>
                     
                 ))}
