@@ -1,7 +1,7 @@
 import { getFormularios } from "../../../lib/forms/forms";
 import { FaCircle } from "react-icons/fa";
 import Link from "next/link";
-import { BotonEditar } from "../../botones/botones";
+import { BotonEditar, BotonStats } from "../../botones/botones";
 
 
 export default async function ListadoForms({email}){
@@ -9,14 +9,14 @@ export default async function ListadoForms({email}){
    
     return(
         <>
-            <div className="flex flex-col gap-3">
+            <div className="py-5 flex flex-col gap-3">
                 {formularios.map(formulario => (
                     <div className="flex items-center text-left gap-2 " key={formulario.id}>
                         <p><FaCircle className="text-green-400"/></p>
                         <p className="truncate w-[20%]">{formulario.name}</p>
                         <p className="truncate w-[50%]">{formulario.description}</p>
                         <div><BotonEditar id={formulario.id}/></div>
-                        <p>Ver estadisticas</p>
+                        <div><BotonStats id={formulario.id}/></div>
                         <p>Copiar enlace</p>
                         <p>Eliminar</p>
                     </div>

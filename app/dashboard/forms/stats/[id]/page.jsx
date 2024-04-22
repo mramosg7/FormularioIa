@@ -1,14 +1,16 @@
 'use client'
 
-import{ Pie }from 'react-chartjs-2'
 import {useEffect, useState} from 'react'
-import 'chart.js/auto';
+
 import {getQuestions} from '@/app/lib/forms/forms.js'
+import Resumen from '@/app/ui/dashboard/stats/resumen';
+import Pregunta from '@/app/ui/dashboard/stats/pregunta';
 
 export default function Estadisticas({params}){
 
     const {id} = params
     const [form, setForm] = useState(null)
+    const [state, setState] = useState(1)
     const [data , setData] = useState({
         labels: [],
         datasets: [
@@ -53,23 +55,18 @@ export default function Estadisticas({params}){
     },[id])
     
     return(
-        <div>
-            {form &&( 
-               <div> 
-                {form.preguntasformulario.map((pregunta) => (
-                    <>
-                     {pregunta.tipo.descripcion != 'Textarea' && <Pie data={{...data,
-                        labels: pregunta.opcionespregunta.map((opcion) => opcion.text),
-                        datasets: [
-                            {
-                            ...data.datasets[0],
-                            data: sacarEstadisticasRespuesta(pregunta),
-                            },
-                        ],}} />}
-                    </>
-                ))}
+        <div className='w-[100%] px-[60px]'>
+             <header className="flex justify-between items-center border-b-4 py-5">
+                <h1 className="text-[25px] font-bold ">Estadisticas</h1>
+            </header>
+            <div className='flex mt-5 mb-5 gap-2 justify-center'>
+                <h1 className={`${state === 1 ? 'border-b-2' : ''} hover:border-b-2 border-primary-100 px-2 cursor-pointer`} onClick={()=>{setState(1)}}>Resumen</h1>
+                <h1 className={`${state === 2 ? 'border-b-2' : ''} hover:border-b-2 border-primary-100 hover:border-primary-100 cursor-pointer px-2`} onClick={()=>{setState(2)}}>Pregunta</h1>
+                <h1 className={`${state === 3 ? 'border-b-2' : ''} hover:border-b-2 border-primary-100 hover:border-primary-100 cursor-pointer px-2`} onClick={()=>{setState(3)}}>Individual</h1>
+
             </div>
-            )}
+            {state === 1 &&  <Resumen form={form} sacarEstadisticasRespuesta={sacarEstadisticasRespuesta} data={data}/>}
+            {state === 2 &&  <Pregunta form={form}/>}
             
         </div>
     )

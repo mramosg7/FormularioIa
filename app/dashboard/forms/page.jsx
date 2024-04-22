@@ -13,9 +13,8 @@ export default async function Forms(){
         <div className=" w-[100%] px-[60px]">
             <header className="flex justify-between items-center border-b-4 py-5">
                 <h1 className="text-[25px] font-bold ">Formularios</h1>
-                <h2>hola</h2>
+                <BotonOpenIa />
             </header>
-            <section className="py-5"><BotonOpenIa /></section>
             <section> <ListadoForms email={user.email}/> </section>
         </div>
     )
