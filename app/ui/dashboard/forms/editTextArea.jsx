@@ -1,13 +1,9 @@
 'use client'
 import { useState } from "react"
-export default function EditTextArea({pregunta, id, addChange}){
-    console.log(pregunta)
-    const [text, setText] = useState(pregunta)
-    
+export default function EditTextArea({pregunta}){
     return(
         <>
-            <input type="text"  className="bg-secondary-200 p-2 text-[17px] rounded-t-lg" value={text} onChange={(e)=>{setText(e.target.value)}} onBlur={()=>{addChange(text,id)}}/>
-            <textarea className="border border-red-500"></textarea>
+            <textarea style={{resize:'none'}} className="border rounded border-primary-100 focus:outline-none focus:border-[2.5px] w-[100%w]"rows={5}></textarea>
         </>
     )
 }

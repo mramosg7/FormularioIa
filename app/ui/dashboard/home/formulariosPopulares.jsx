@@ -1,13 +1,23 @@
 import { getPopularForms } from "@/app/lib/forms/forms"
+import { SlOptionsVertical } from "react-icons/sl";
 
 export default async function FormulariosPopulares() {
     const data = await getPopularForms()
+   
     return (
-        <div className="m-6 flex flex-wrap gap-4">
+        <div className="flex flex-col rounded gap-4 ">
             {data.map(form=>( 
-                <div className="shadow-[1px_1px_8px_1px_rgb(0,0,0,0.1)] rounded p-2 flex flex-col text-center gap-2 w-[450px]" key={form.id}>
-                    <h1 className="text-[17px] font-bold">{form.name}</h1>
-                    <h1>{form.description}</h1>
+                <div className="rounded flex gap-5 items-center p-3 hover:bg-black/20 " key={form.id}> 
+                    
+                    <img className="w-[150px] h-[100px] rounded" src={`/${form.id}.png`} alt="formulario"/>
+                    
+                    
+                    <div className="w-[65%] flex flex-col gap-2">
+                        <h1 className=" truncate text-[17px] font-bold ">{form.name}</h1>
+                        <h1 className=" truncate font-semibold">{form.description}</h1>
+                    </div>
+                    
+                   
                 </div>
             ))}
         </div>

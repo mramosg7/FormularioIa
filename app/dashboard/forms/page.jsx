@@ -10,7 +10,7 @@ export default async function Forms(){
    const {user} = await auth()
  
     return(
-        <div className=" w-[100%] px-[60px]">
+        <div className=" w-[100%] px-[60px] text-white">
             <header className="flex justify-between items-center border-b-4 py-5">
                 <h1 className="text-[25px] font-bold ">Formularios</h1>
                 <BotonOpenIa />

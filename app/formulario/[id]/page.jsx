@@ -17,7 +17,7 @@ export default function FormularioUsuario({params}){
     }, [id]);
 
     return(
-        <div className="m-5 ">
+        <div className="py-5 ">
             {formulario && (<div className="flex flex-col items-center justify-center">
                 <div className="bg-primary-100 p-2 w-[50%] text-white text-center rounded-t-xl">
                     <h1 className="font-bold text-[20px]">{formulario.name}</h1>

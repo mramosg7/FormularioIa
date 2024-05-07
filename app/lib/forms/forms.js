@@ -1,5 +1,6 @@
 'use server'
-
+import fs from 'fs';
+import path from 'path';
 import { PrismaClient } from '@prisma/client';
 import { redirect } from 'next/navigation.js';
 
@@ -89,11 +90,14 @@ export async function getFormulario(id){
                 include: {
                   tipo: true,
                   opcionespregunta: true
-                }
+                },
+                orderBy: {
+                    id: 'asc'
+                  }
               }
             }
           });
-          console.log(formulario)
+    
         return formulario
     }catch (error) {
         console.error('Failed to get form:', error);
@@ -218,5 +222,24 @@ export const updateChanges = async (changes) => {
     }catch(error){
         console.error('Failed to update changes:', error);
         throw new Error('Failed to update changes.');
+    }
+}
+
+export async function saveImage(imageData, id){
+    try{
+        
+        const imageBuffer = Buffer.from(imageData.replace(/^data:image\/\w+;base64,/, ''), 'base64');
+
+        const imagePath = path.join(process.cwd(), 'public', `${id}.png`);
+        fs.writeFile(imagePath, imageBuffer, (err) => {
+            if (err) {
+                console.error('Error al guardar la imagen:', err);
+                throw new Error('Error al guardar la imagen');
+            }
+        })
+        return null;
+    }catch(error){
+        console.error('Failed to save image:', error);
+        throw new Error('Failed to save image.');
     }
 }

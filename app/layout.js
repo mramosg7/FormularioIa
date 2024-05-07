@@ -14,13 +14,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-       
-        <SessionProvider>
-        {children}
-        </SessionProvider>
+      <SessionProvider>
+        <body className="h-[100vh]">
         
-      </body>
+          
+            {children}
+        
+          
+        </body>
+      </SessionProvider>
     </html>
   );
 }

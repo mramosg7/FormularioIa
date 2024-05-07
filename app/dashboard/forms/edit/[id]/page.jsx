@@ -11,7 +11,7 @@ import EditSelect from '@/app/ui/dashboard/forms/editSelect'
 export default function Edit({params}){
    const [formulario , setFormulario] = useState(null)
    const [changes, setChanges] = useState({preguntas: {}, opciones:{}})
-   console.log(changes)
+    
    
    useEffect(() => {
        getFormulario(params.id).then(data => {
@@ -28,28 +28,32 @@ export default function Edit({params}){
     }
    
     return(
-        <div className="mt-5">
+        <div className="mt-5 flex justify-center">
            {formulario && (
-            <div className="flex flex-col gap-[20px] items-center justify-center">
-                <div className="bg-secondary-100 text-black p-2 rounded text-center">
-                    <h1>{formulario.name}</h1>
+            <div className="flex flex-col  items-center justify-center w-[75%]" id='formulario'>
+                <div className="bg-primary-100 text-white p-2 rounded-t-xl text-center w-[100%]">
+                    <h1 className='font-bold text-[25px]'>{formulario.name}</h1>
                     <h3>{formulario.description}</h3>
                 </div>
-                
+                <div className='bg-secondary-100 w-[100%] flex flex-col items-center p-5 gap-5'>
                 {formulario.preguntasformulario.map(pregunta => (
-                    <div className='rounded' key={pregunta.id}>
-                        {pregunta.tipo.descripcion === 'Textarea'&& <EditTextArea pregunta={pregunta.texto} id={pregunta.id} addChange={addChanges}/>}
-                        {pregunta.tipo.descripcion === 'RadioGroup'&& (
-                            <EditRadioGroup pregunta={pregunta} id={pregunta.id} addChange={addChanges} changeOption={changeOption}/>
-                        )}
-                        {pregunta.tipo.descripcion === 'Select'&& (
-                           <EditSelect pregunta={pregunta} id={pregunta.id} addChange={addChanges} changeOption={changeOption}/>
-                        )}
+                    <div className='rounded border-l-4 border-primary-100 bg-white w-[50%]' key={pregunta.id}>
+                        <input type="text"  className="rounded focus:outline-none focus:border-2 border-primary-100 p-2 font-bold text-[17px] w-[100%]" defaultValue={pregunta.texto} onBlur={(e)=>{addChanges(e.target.value,pregunta.id)}}/>
+                        <div className='p-2'>
+                            {pregunta.tipo.descripcion === 'Textarea'&& <EditTextArea pregunta={pregunta.texto}/> }
+                            {pregunta.tipo.descripcion === 'RadioGroup'&& (
+                                <EditRadioGroup pregunta={pregunta} changeOption={changeOption}/>
+                            )}
+                            {pregunta.tipo.descripcion === 'Select'&& (
+                            <EditSelect pregunta={pregunta}  changeOption={changeOption}/>
+                            )}
+                        </div>
                         
                     </div>
                     
                 ))}
-               <BotonConfirmarEdicion changes={changes}/>
+               <BotonConfirmarEdicion changes={changes} id={formulario.id}/>
+               </div>
             </div>
            )}
            
