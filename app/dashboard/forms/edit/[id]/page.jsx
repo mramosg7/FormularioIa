@@ -35,11 +35,11 @@ export default function Edit({params}){
                     <h1 className='font-bold text-[25px]'>{formulario.name}</h1>
                     <h3>{formulario.description}</h3>
                 </div>
-                <div className='bg-secondary-100 w-[100%] flex flex-col items-center p-5 gap-5'>
+                <div className='bg-secondary-300 w-[100%] flex flex-col items-center p-5 gap-5'>
                 {formulario.preguntasformulario.map(pregunta => (
-                    <div className='rounded border-l-4 border-primary-100 bg-white w-[50%]' key={pregunta.id}>
-                        <input type="text"  className="rounded focus:outline-none focus:border-2 border-primary-100 p-2 font-bold text-[17px] w-[100%]" defaultValue={pregunta.texto} onBlur={(e)=>{addChanges(e.target.value,pregunta.id)}}/>
-                        <div className='p-2'>
+                    <div className='p-2 flex flex-col gap-2 rounded border-l-4 border-primary-100 bg-white w-[50%]' key={pregunta.id}>
+                        <input type="text"  className="rounded focus:outline-none focus:border-2 border-primary-100 p-1 font-bold text-[17px] w-[100%] whitespace-normal" defaultValue={pregunta.texto} onBlur={(e)=>{addChanges(e.target.value,pregunta.id)}}/>
+                        <div className='px-5'>
                             {pregunta.tipo.descripcion === 'Textarea'&& <EditTextArea pregunta={pregunta.texto}/> }
                             {pregunta.tipo.descripcion === 'RadioGroup'&& (
                                 <EditRadioGroup pregunta={pregunta} changeOption={changeOption}/>

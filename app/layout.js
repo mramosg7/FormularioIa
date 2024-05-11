@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <SessionProvider>
-        <body className="h-[100vh]">
+        <body className="h-[100vh] bg-secondary-100">
         
           
             {children}

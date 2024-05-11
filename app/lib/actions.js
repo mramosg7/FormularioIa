@@ -1,5 +1,5 @@
 'use server'
-import { signIn } from '@/auth.js';
+import { signIn, signOut } from '@/auth.js';
 import {fetchChat} from './openai/openai.js';
 import { redirect } from 'next/navigation.js';
 import { createForm } from './forms/forms.js';
@@ -98,4 +98,10 @@ export async function authenticate(
   
 
 
-  
+  export async function logOut(){
+    try {
+      await signOut();
+    } catch (error) {
+      throw error;
+    }
+  }

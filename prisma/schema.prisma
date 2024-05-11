@@ -29,6 +29,7 @@ model usuario {
   nombre   String
   nick     String
   email    String
+  password String
   plan     plan      @relation(fields: [planId], references: [id])
   planId   String
   formularios formulario[]
@@ -41,6 +42,7 @@ model formulario {
   usuarioId   String
   name        String
   description String
+  image       String    @default("formDefault")
   preguntasformulario preguntaformulario[]
   createdAt     DateTime            @default(now())
 }

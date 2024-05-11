@@ -26,12 +26,13 @@ export const { handlers:{GET,POST}, auth, signIn, signOut} = NextAuth({
     providers:[
         Credentials({
             async authorize(credentials){
-                console.log(credentials)
+                console.log("credentials",credentials)
                 const user = await getUser(credentials.email);
                       
                 if(user){
                     console.log(user)
-                    return user;
+                    const user2 = {id:user.id, name:user.nick, email:user.email}
+                    return user2;
                 }else{
                     return null;
                 }

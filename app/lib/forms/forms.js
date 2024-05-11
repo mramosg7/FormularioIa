@@ -176,12 +176,13 @@ export const getPopularForms = async (email) => {
             select: {
                 id: true,
                 name: true,
-                description: true
+                description: true,
+                image:true
             },
             take: 5
           });
         
-          console.log(formulariosMasRespondidos)
+          
           return formulariosMasRespondidos
     }catch(error){
         console.error('Failed to get popular forms:', error);
@@ -235,6 +236,15 @@ export async function saveImage(imageData, id){
             if (err) {
                 console.error('Error al guardar la imagen:', err);
                 throw new Error('Error al guardar la imagen');
+            }
+        })
+        const prisma =new PrismaClient();
+        await prisma.formulario.update({
+            where:{
+                id:id
+            },
+            data:{
+                image:id
             }
         })
         return null;

@@ -6,7 +6,7 @@ export default function EditSelect({pregunta, changeOption}){
         <>
             <ol className="ml-5 list-decimal">
             {pregunta.opcionespregunta.map(opciones => (
-                <li><input key={opciones.id} type="text" defaultValue={opciones.text}  onBlur={(e)=>{changeOption(e.target.value,opciones.id)}}/></li>
+                <li><input key={opciones.id} type="text" className="focus:outline-none focus:border border-primary-100 rounded " defaultValue={opciones.text}  onBlur={(e)=>{changeOption(e.target.value,opciones.id)}}/></li>
             ))}
             </ol>
         </>

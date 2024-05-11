@@ -9,6 +9,7 @@ export const authConfig = {
         const isLoggedIn = !!auth?.user;
         const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
         const isOnEditPage = nextUrl.pathname.startsWith('/dashboard/forms/edit');
+        console.log(auth)
         if (isOnDashboard) {
           if (isLoggedIn) {
             if (isOnEditPage){
