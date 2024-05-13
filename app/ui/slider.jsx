@@ -29,13 +29,13 @@ const imgs = [
 
 export default function Slider() {
   return (
-    <div className="w-[100%]  flex overflow-hidden ">
-        <div className=" flex-shrink-0  gap-[60px] flex animate-slide">
+    <div className="w-[100%]  flex overflow-hidden">
+        <div className=" flex-shrink-0  gap-[60px] flex animate-slide ">
             {imgs.map((img) => (
                 <img src={img.url} alt={img.tittle} key={img.tittle} className="h-[50px]"/>
             ))}
         </div>
-        <div className=" flex-shrink-0  gap-[60px] flex animate-slide">
+        <div className="flex-shrink-0  gap-[60px] flex animate-slide">
             {imgs.map((img) => (
                 <img src={img.url} alt={img.tittle} key={img.tittle} className="h-[50px] flex-grow-0 flex-shrink-0"/>
             ))}
