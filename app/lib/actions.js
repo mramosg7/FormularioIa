@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation.js';
 import { createForm } from './forms/forms.js';
 import { AuthError } from 'next-auth';
 import { PrismaClient } from '@prisma/client';
+import { encriptarContrasena } from './utils.js';
 
 export async function getIdUser(email){
  
@@ -104,4 +105,40 @@ export async function authenticate(
     } catch (error) {
       throw error;
     }
+  }
+
+
+  export async function register( prevState,
+    formData,){
+      try{
+        const prisma = new PrismaClient();
+        const user = await prisma.usuario.findFirst({
+          where: {
+            OR:[
+              {
+                email: formData.get('email')
+              },
+              {
+                nick: formData.get('nick')
+              }
+            ]
+          }
+        })
+
+        if(user){
+          return {error: 'El email o el nombre de usuario ya están en uso'}
+        }
+        const newPassword = await encriptarContrasena(formData.get('password'))
+        const newUser = await prisma.usuario.create({
+          data: {
+            email: formData.get('email'),
+            nombre: formData.get('name'),
+            nick: formData.get('nick'),
+            password: newPassword
+          }
+        })
+        return {success: 'Usuario creado correctamente'}
+      }catch(e){
+        throw e
+      }
   }

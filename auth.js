@@ -3,6 +3,7 @@ import {authConfig} from "./auth.config.js";
 import {PrismaClient} from "@prisma/client";
 import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import bcrypt from "bcrypt";
 
 
 async function getUser(email){
@@ -28,14 +29,17 @@ export const { handlers:{GET,POST}, auth, signIn, signOut} = NextAuth({
             async authorize(credentials){
                 console.log("credentials",credentials)
                 const user = await getUser(credentials.email);
-                      
-                if(user){
-                    console.log(user)
+                
+                if(!user) return null;
+                const passwordsMatch = await bcrypt.compare(credentials.password, user.password);
+                console.log("passwordsMatch",passwordsMatch)
+                if(passwordsMatch){
                     const user2 = {id:user.id, name:user.nick, email:user.email}
                     return user2;
-                }else{
-                    return null;
                 }
+
+                console.log('Invalid credentials');
+                return null;
             }
         }),
         GoogleProvider({

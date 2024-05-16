@@ -11,6 +11,7 @@
   "dependencies": {
     "@prisma/client": "^5.12.0",
     "@prisma/extension-accelerate": "^1.0.0",
+    "bcrypt": "^5.1.1",
     "chart.js": "^4.4.2",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
@@ -26,7 +27,8 @@
     "react-dom": "^18",
     "react-icons": "^5.0.1",
     "react-tooltip": "^5.26.3",
-    "tailwind-merge": "^2.3.0"
+    "tailwind-merge": "^2.3.0",
+    "use-debounce": "^10.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",

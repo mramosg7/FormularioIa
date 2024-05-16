@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { PrismaClient } from '@prisma/client';
 import { redirect } from 'next/navigation.js';
+import { revalidatePath } from 'next/cache';
 
 
 export async function createForm(formS, userid){
@@ -251,5 +252,102 @@ export async function saveImage(imageData, id){
     }catch(error){
         console.error('Failed to save image:', error);
         throw new Error('Failed to save image.');
+    }
+}
+
+export async function getFormWhithQuery(query){
+    try{
+        const prisma = new PrismaClient();
+        const form = await prisma.formulario.findMany({
+            where:{
+                OR:[
+                    {
+                        name:{
+                            contains:query
+                        }
+                    },
+                    {
+                        description:{
+                            contains:query
+                        }
+                    }
+                ]
+            }
+        })
+        return form
+    }catch(error){
+        console.error('Failed to get form with query:', error);
+        throw new Error('Failed to get form with query.');
+    }
+}
+
+
+export async function getFormulariosUsuarioQuery(query, email){
+    try{
+        const prisma = new PrismaClient();
+        const formularios = await prisma.formulario.findMany({
+            where: {
+              AND: [
+                { usuario: { email: email } }, 
+                {
+                  OR: [
+                    { name: { contains: query } }, 
+                    { description: { contains: query } } 
+                  ]
+                }
+              ]
+            },
+          });
+        return formularios
+    }catch(error){
+        console.error('Failed to get forms with query:', error);
+        throw new Error('Failed to get forms with query.');
+    }}
+
+
+
+export async function deleteForms(formularios){
+    try{
+        const prisma = new PrismaClient();
+        for (const formId of formularios) {
+            // Eliminar respuestas asociadas a las preguntas de este formulario
+            await prisma.respuestausuario.deleteMany({
+                where: {
+                    pregunta: {
+                        formularioId: formId
+                    }
+                }
+            });
+
+            // Eliminar opciones de pregunta asociadas a las preguntas de este formulario
+            await prisma.opcionpregunta.deleteMany({
+                where: {
+                    pregunta: {
+                        formularioId: formId
+                    }
+                }
+            });
+
+            // Eliminar preguntas asociadas a este formulario
+            await prisma.preguntaformulario.deleteMany({
+                where: {
+                    formularioId: formId
+                }
+            });
+        }
+
+        // Finalmente, eliminar los formularios
+        await prisma.formulario.deleteMany({
+            where: {
+                id: {
+                    in: formularios
+                }
+            }
+        });
+        revalidatePath('/dashboard/forms');
+        return null
+    }catch(error){
+        console.error('Failed to delete form:', error);
+        throw new Error('Failed to delete form.');
     }
 }

@@ -31,7 +31,7 @@ export default function Home() {
               
             </div>
         </header>
-        <section className=" w-[50%] flex flex-col items-center gap-5 py-5 my-5">
+        <section className=" w-[100%] lg:w-[75%] xl:w-[50%] flex flex-col items-center gap-5 py-5 my-5 px-10 lg:px-0">
           
             <p className="w-[200px] flex gap-3 items-center justify-center border  border-secondary-200/20 text-white p-3 rounded bg-secondary-300/40 "><BsStars className="font-bold text-[20px]"/>Integracion de IA</p>
             <h1 className="text-[60px] text-center font-bold "><span className="bg-gradient-to-br from-primary-400 via-primary-100 to-primary-200 text-transparent bg-clip-text">Revoluciona</span> tus formularios con IA</h1>
