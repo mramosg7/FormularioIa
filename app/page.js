@@ -21,9 +21,6 @@ export default function Home() {
                 <img src="/logo.png" className="w-[200px]" alt="logo"/>
             </div>
             <div className="flex gap-5">
-              <Link href="/dashboard">Inicio</Link>
-              <Link href="/dashboard">Sobre nosotros</Link>
-              <Link href="/dashboard">Contactanos</Link>
               <Link href="/login">Login</Link>
               <Link href="/login">Register</Link>
               

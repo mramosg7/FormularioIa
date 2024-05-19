@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-import { withAccelerate } from '@prisma/extension-accelerate'
+
 export const authConfig = {
     pages: {
       signIn: '/login',
@@ -8,14 +7,8 @@ export const authConfig = {
       authorized({ auth, request: { nextUrl } }) {
         const isLoggedIn = !!auth?.user;
         const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
-        const isOnEditPage = nextUrl.pathname.startsWith('/dashboard/forms/edit');
-        console.log(auth)
         if (isOnDashboard) {
           if (isLoggedIn) {
-            if (isOnEditPage){
-              const id = nextUrl.pathname.split('/')[4]
-              // return verifyUser(auth.user.email,id)
-            }
             return true
           };
           return false; 
@@ -45,4 +38,9 @@ const verifyUser = async (email,id) => {
 
     
     return form.usuarioId === user.id
+
+    // if (isOnEditPage){
+            //   const id = nextUrl.pathname.split('/')[4]
+            //   // return verifyUser(auth.user.email,id)
+            // }
 }
