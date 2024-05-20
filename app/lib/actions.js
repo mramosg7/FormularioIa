@@ -88,9 +88,10 @@ export async function authenticate(
               opcionId: opcion.id
             }
           })
+
         }
       });
-      redirect('/formulario/confirmar')
+      return({success: 'La respuesta a sido enviada correctamente'})
     }catch(e){
       throw e
     }

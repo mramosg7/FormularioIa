@@ -4,11 +4,12 @@ import { getFormulario } from "@/app/lib/forms/forms";
 import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from 'react-dom';
 import { exportarRespuesta } from "@/app/lib/actions";
+import { CorrectArlert } from "@/app/ui/alertas";
 
 export default function FormularioUsuario({params}){
     const {id} = params;
     const [formulario, setFormulario] = useState(null);
-    const [error, dispacher] = useFormState(exportarRespuesta, undefined);
+    const [ mesagge, dispacher] = useFormState(exportarRespuesta, undefined);
     
     useEffect(() => {
         getFormulario(id).then((data) => {
@@ -18,6 +19,9 @@ export default function FormularioUsuario({params}){
 
     return(
         <div className="py-5 bg-secondary-100">
+            <div className=" t-0 left-4 fixed ">
+                {mesagge?.success && <CorrectArlert message={mesagge.success} />}
+            </div>
             {formulario && (<div className="flex flex-col items-center justify-center ">
                 <div className="bg-primary-100 p-2 w-[50%] text-white text-center rounded-t-xl">
                     <h1 className="font-bold text-[20px]">{formulario.name}</h1>
