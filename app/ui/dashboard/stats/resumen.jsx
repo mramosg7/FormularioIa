@@ -10,7 +10,7 @@ export default function Resumen({form, sacarEstadisticasRespuesta, data}){
                 {form.preguntasformulario.map((pregunta) => (
                     <>
                     {pregunta.tipo.descripcion != 'Textarea' && (
-                        <div className='bg-secondary-100 p-5 rounded   w-[50%] flex flex-col items-center'>
+                        <div className='bg-secondary-300 p-5 rounded   w-[50%] flex flex-col items-center'>
                             <div className='w-[100%]'>
                                 <h1 className='font-semibold text-[17px]'>{pregunta.texto}</h1>
                                 <h2>{pregunta.respuestasusuario.length} Respuestas</h2>

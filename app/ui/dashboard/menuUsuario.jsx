@@ -29,7 +29,7 @@ export default function MenuUsuario({user}){
                 
             </div>
             <button className="flex gap-3 py-2 items-center " onClick={()=>{setOpen(prev => !prev)}}>
-                <img src="/avatar.png" className="rounded-full w-[40px] h-[40px]" alt="avatar" />
+                <img src={user.image || "/avatar.png"} className="rounded-full w-[40px] h-[40px]" alt="avatar" />
                 <h1 className="truncate uppercase">{user.name}</h1>
             </button>
         </div>

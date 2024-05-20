@@ -14,16 +14,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <SessionProvider>
-        <body className={`${montserrat.className} h-[100vh] bg-secondary-100`}>
-        
+    
+      <html lang="en">
+        <SessionProvider>
+          <body className={`${montserrat.className} h-[100vh] bg-secondary-100`}>
           
-            {children}
-        
+            
+              {children}
           
-        </body>
-      </SessionProvider>
-    </html>
+            
+          </body>
+        </SessionProvider>
+      </html>
+  
   );
 }

@@ -55,15 +55,13 @@ export default function Estadisticas({params}){
     },[id])
     
     return(
-        <div className='w-[100%] px-[60px]'>
-             <header className="flex justify-between items-center border-b-4 py-5">
-                <h1 className="text-[25px] font-bold ">Estadisticas</h1>
+        <div className='w-[100%] px-[60px] py-5 text-white'>
+             <header className="flex justify-between items-center py-5">
+                <h1 className="text-[25px] font-bold ">Respuestas</h1>
             </header>
             <div className='flex mt-5 mb-5 gap-2 justify-center'>
                 <h1 className={`${state === 1 ? 'border-b-2' : ''} hover:border-b-2 border-primary-100 px-2 cursor-pointer`} onClick={()=>{setState(1)}}>Resumen</h1>
                 <h1 className={`${state === 2 ? 'border-b-2' : ''} hover:border-b-2 border-primary-100 hover:border-primary-100 cursor-pointer px-2`} onClick={()=>{setState(2)}}>Pregunta</h1>
-                <h1 className={`${state === 3 ? 'border-b-2' : ''} hover:border-b-2 border-primary-100 hover:border-primary-100 cursor-pointer px-2`} onClick={()=>{setState(3)}}>Individual</h1>
-
             </div>
             {state === 1 &&  <Resumen form={form} sacarEstadisticasRespuesta={sacarEstadisticasRespuesta} data={data}/>}
             {state === 2 &&  <Pregunta form={form}/>}

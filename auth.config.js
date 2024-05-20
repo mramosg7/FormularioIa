@@ -1,4 +1,6 @@
 
+
+
 export const authConfig = {
     pages: {
       signIn: '/login',
@@ -17,6 +19,7 @@ export const authConfig = {
         }
         return true;
       },
+      
     },
     providers: [],
   }

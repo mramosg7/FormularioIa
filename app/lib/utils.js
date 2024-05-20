@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import generatePassword from 'generate-password';
 
 export async function encriptarContrasena(contrasena){
     try{
@@ -9,3 +10,19 @@ export async function encriptarContrasena(contrasena){
         throw e;
     }
 }
+
+
+export async function passwordGenerate(){
+    const password = await generatePassword.generate({
+        length: 100,
+        numbers: true,
+        symbols: true,
+        uppercase: true,
+        lowercase: true,
+        excludeSimilarCharacters: true
+      });
+    const contsena =  await encriptarContrasena(password);
+    return contsena;
+
+}
+
