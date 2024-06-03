@@ -22,8 +22,7 @@ export const authConfig = {
       
     },
     providers: [],
-    trustHost: process.env.TRUSTED_HOST || false,
-    site: process.env.NEXTAUTH_URL,
+    trustHost: process.env.TRUSTED_HOST || false
   }
 
 
