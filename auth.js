@@ -37,8 +37,7 @@ export const { handlers:{GET,POST}, auth, signIn, signOut} = NextAuth({
                             email:user.email,
                             nick:user.name,
                             nombre:user.name,
-                            password: await passwordGenerate(),
-                            planId:"e240ed61-b5ae-4431-adf0-ada4d0504f8b"
+                            password: await passwordGenerate()
                         }
                     });
                 }
