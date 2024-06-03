@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export default async function FormulariosPopulares() {
     const data = await getPopularForms()
-    console.log(data)
+    
    
     return (
         <div className="flex flex-col rounded gap-4 ">
