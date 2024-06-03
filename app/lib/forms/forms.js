@@ -310,7 +310,6 @@ export async function deleteForms(formularios){
     try{
         const prisma = new PrismaClient();
         for (const formId of formularios) {
-            // Eliminar respuestas asociadas a las preguntas de este formulario
             await prisma.respuestausuario.deleteMany({
                 where: {
                     pregunta: {
@@ -319,7 +318,6 @@ export async function deleteForms(formularios){
                 }
             });
 
-            // Eliminar opciones de pregunta asociadas a las preguntas de este formulario
             await prisma.opcionpregunta.deleteMany({
                 where: {
                     pregunta: {
@@ -328,7 +326,6 @@ export async function deleteForms(formularios){
                 }
             });
 
-            // Eliminar preguntas asociadas a este formulario
             await prisma.preguntaformulario.deleteMany({
                 where: {
                     formularioId: formId
@@ -336,7 +333,6 @@ export async function deleteForms(formularios){
             });
         }
 
-        // Finalmente, eliminar los formularios
         await prisma.formulario.deleteMany({
             where: {
                 id: {
