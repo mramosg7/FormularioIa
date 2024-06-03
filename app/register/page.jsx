@@ -25,8 +25,8 @@ export default function Register(){
                     <input className='bg-secondary-100 p-3 rounded-xl focus:outline-none' type="password" placeholder='Contraseña' name="password" id="password" required/>
                     <input className='bg-secondary-100 p-3 rounded-xl focus:outline-none' type="password" placeholder='Confirmar contraseña' name="conpassword" id="conpassword" required/>
                     <ButtonSubmit />
-                    {errorMesagge.success && <CorrectArlert message={errorMesagge.success}/>}
-                    {errorMesagge.error && <ErrorArlert message={errorMesagge.error}/>}
+                    {errorMesagge?.success && <CorrectArlert message={errorMesagge.success}/>}
+                    {errorMesagge?.error && <ErrorArlert message={errorMesagge.error}/>}
 
                 </form>
                 <div className="flex gap-5 items-center">

@@ -30,8 +30,8 @@ model usuario {
   nick     String
   email    String
   password String
-  plan     plan      @relation(fields: [planId], references: [id])
-  planId   String    @default("f53a6378-2ead-4373-9ff5-6d9f1abc8b6c")
+  plan     plan?      @relation(fields: [planId], references: [id])
+  planId   String?
   formularios formulario[]
 }
 

@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import generatePassword from 'generate-password';
 
 export async function encriptarContrasena(contrasena){

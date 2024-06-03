@@ -3,7 +3,7 @@ import {authConfig} from "./auth.config.js";
 import {PrismaClient} from "@prisma/client";
 import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { passwordGenerate } from "./app/lib/utils.js";
 
 
