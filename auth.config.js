@@ -22,7 +22,7 @@ export const authConfig = {
       
     },
     providers: [],
-    trustHost: process.env.TRUSTED_HOST || false
+    trustHost: process.env.TRUSTED_HOST || true
   }
 
 

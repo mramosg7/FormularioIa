@@ -6,10 +6,25 @@ import { useFormState, useFormStatus } from 'react-dom';
 import { exportarRespuesta } from "@/app/lib/actions";
 import { CorrectArlert } from "@/app/ui/alertas";
 
+import { ToastContainer, toast, Bounce } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function FormularioUsuario({params}){
     const {id} = params;
     const [formulario, setFormulario] = useState(null);
     const [ mesagge, dispacher] = useFormState(exportarRespuesta, undefined);
+    const notify = () => toast.success("¡Formulario enviado con exito!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+        });
     
     useEffect(() => {
         getFormulario(id).then((data) => {
@@ -17,11 +32,14 @@ export default function FormularioUsuario({params}){
         });
     }, [id]);
 
+    useEffect(() => {
+        if (mesagge?.success) {
+            notify();
+        }
+    }, [mesagge]);
+
     return(
         <div className="py-5 bg-secondary-100">
-            <div className=" t-0 left-4 fixed ">
-                {mesagge?.success && <CorrectArlert message={mesagge.success} />}
-            </div>
             {formulario && (<div className="flex flex-col items-center justify-center ">
                 <div className="bg-primary-100 p-2 w-[50%] text-white text-center rounded-t-xl">
                     <h1 className="font-bold text-[20px]">{formulario.name}</h1>
@@ -52,6 +70,7 @@ export default function FormularioUsuario({params}){
                     <div className="">
                         <SubmitButton/>
                     </div>
+                    <ToastContainer />
                     
                 </form>
             </div>)}
@@ -63,10 +82,15 @@ export default function FormularioUsuario({params}){
 
 function SubmitButton() {
     const { pending } = useFormStatus();
+
+    
    
     return (
-      <button className="bg-primary-100 rounded mt-2 text-white py-2 px-5" aria-disabled={pending}>
-        {pending ? 'Enviando...' : 'Enviar'}
-      </button>
+        <>
+            <button className="bg-primary-100 rounded mt-2 text-white py-2 px-5" aria-disabled={pending}>
+                {pending ? 'Enviando...' : 'Enviar'}
+            </button>
+           
+        </>
     );
   }

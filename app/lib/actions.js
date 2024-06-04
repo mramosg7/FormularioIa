@@ -16,7 +16,7 @@ export async function getIdUser(email){
         email: email
       }
     })
- 
+    console.log(email)
     return user.id
   }catch(e){
     throw e

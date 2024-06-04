@@ -7,11 +7,12 @@ import Link from "next/link";
 export default async function FormulariosRecientes({email}) {
    
     const data = await getLatestForms(email)
+    console.log(data)
   
     return (
         <div className="flex flex-col gap-4">
             
-             {data[0].formularios.map(form=>( 
+             {data && data[0]?.formularios.map(form=>( 
                 <Link href={`/dashboard/forms/edit/${form.id}`} key={form.id} className="items-center gap-5 flex p-3 hover:bg-black/20 rounded">
                     <div className="w-[150px] h-[100px] rounded ">
                         <img className="w-[150px] h-[100px] rounded" src={`/${form.image}.png`} alt="formulario" />

@@ -6,10 +6,42 @@ import { signIn } from 'next-auth/react';
 import Link from 'next/link.js';
 import { FaGoogle } from "react-icons/fa";
 import { CorrectArlert, ErrorArlert } from '../ui/alertas.jsx';
+import { useEffect, useState } from 'react';
+import { toast, Bounce, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 export default function Register(){
     const [errorMesagge, dispacher] = useFormState(register, undefined);
+    const [passwordError, setpasswordError] = useState(false);
+
+    useEffect(() => {
+        if (errorMesagge?.success) {
+            toast.success("¡Te has registrado con exito!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+                });
+                document.querySelectorAll('input').forEach(input => input.value = '');
+        }
+    }, [errorMesagge]);
+
+    const handleChange = (e) => {
+        console.log(e.target.value, document.getElementById('password').value)
+        if(e.target.value != document.getElementById('password').value){
+            setpasswordError(true);
+        }else{
+            setpasswordError(false);
+        
+        }
+    }
     return(
         <>
             <div className='bg-secondary-100 w-full h-full flex justify-center items-center flex-col gap-5 text-white'>
@@ -18,15 +50,23 @@ export default function Register(){
                         <h1 className='font-bold text-[25px] text-center'>Registrarse</h1>
                         <p>Crea una cuenta de forma segura y gratuita</p>
                     </div>
-                    
-                    <input className='bg-secondary-100 p-3 rounded-xl focus:outline-none' type="email" placeholder='Email' name="email" id="email" required/>
+                    <div>
+                        <input className={`bg-secondary-100 p-3 rounded-xl focus:outline-none ${errorMesagge?.error ? 'border-[3px] border-red-500' : ''} w-full`} type="email" placeholder='Email' name="email" id="email" required/>
+                        {errorMesagge?.error && <p className='text-red-500 w-full text-left mx-3 '>El nombre de usuario o el correo ya esta en uso</p>}
+                    </div>
                     <input className='bg-secondary-100 p-3 rounded-xl focus:outline-none' type="text" placeholder='Nombre y apellido' name="name" id="name" required/>
-                    <input className='bg-secondary-100 p-3 rounded-xl focus:outline-none' type="text" placeholder='Nombre de usuario' name="nick" id="nick" required/>
+                    <div>
+                        <input className={`bg-secondary-100 p-3 rounded-xl w-full focus:outline-none ${errorMesagge?.error ? 'border-[3px] border-red-500' : ''}`} type="text" placeholder='Nombre de usuario' name="nick" id="nick" required/>
+                        {errorMesagge?.error && <p className='text-red-500 w-full text-left mx-3'>El nombre de usuario o el correo ya esta en uso</p>}
+                    </div>
+
                     <input className='bg-secondary-100 p-3 rounded-xl focus:outline-none' type="password" placeholder='Contraseña' name="password" id="password" required/>
-                    <input className='bg-secondary-100 p-3 rounded-xl focus:outline-none' type="password" placeholder='Confirmar contraseña' name="conpassword" id="conpassword" required/>
+                    <div>
+                        <input onChange={(e)=>{handleChange(e)}} className={`w-full bg-secondary-100 p-3 rounded-xl focus:outline-none ${passwordError ? 'border-[3px] border-red-500' : ''}`} type="password" placeholder='Confirmar contraseña' name="conpassword" id="conpassword" required/>
+                        {passwordError && <p className='text-red-500 w-full text-left mx-3'>Las contraseñas no coinciden</p>}
+                    </div>
+        
                     <ButtonSubmit />
-                    {errorMesagge?.success && <CorrectArlert message={errorMesagge.success}/>}
-                    {errorMesagge?.error && <ErrorArlert message={errorMesagge.error}/>}
 
                 </form>
                 <div className="flex gap-5 items-center">
@@ -41,6 +81,7 @@ export default function Register(){
                     <p>¿Ya tienes una cuenta? <Link className='text-blue-500 underline hover:text-blue-700' href={'/login'}>Iniciar sesión</Link></p>
                 </div>
             </div>
+            <ToastContainer />
         </>
     )
 }
