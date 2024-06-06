@@ -1,9 +1,0 @@
-[build]
-  command = "npx prisma-generate && npm run build"
-
-[functions]
-  node_bundler = "esbuild"
-
-[[functions]]
-  directory = "netlify/functions"
-  timeout = 26 # Para el plan Pro
