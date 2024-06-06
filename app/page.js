@@ -16,13 +16,13 @@ export default function Home() {
         className="flex flex-col items-center text-white "
       >
     
-     <header className="bg-secondary-300 shadow-xl shadow-black/20 text-[20px] p-5 flex items-center justify-between rounded-xl border border-secondary-200/30 text-white mt-5 w-[75%] ">
+     <header className="bg-secondary-300 shadow-xl shadow-black/20 text-[17px] p-5 flex items-center justify-between rounded-xl border border-secondary-200/30 text-white mt-5 w-[75%] ">
             <div>
                 <img src="/logo.png" className="w-[200px]" alt="logo"/>
             </div>
-            <div className="flex gap-5">
-              <Link href="/login">Login</Link>
-              <Link href="/login">Register</Link>
+            <div className="flex gap-5 items-center">
+              <Link href="/login">Iniciar sesion</Link>
+              <Link href="/register" className="bg-primary-100 p-2 rounded">Crea una cuenta</Link>
               
               
               
@@ -30,7 +30,7 @@ export default function Home() {
         </header>
         <section className=" w-[100%] lg:w-[75%] xl:w-[50%] flex flex-col items-center gap-5 py-5 my-5 px-10 lg:px-0">
           
-            <p className="w-[200px] flex gap-3 items-center justify-center border  border-secondary-200/20 text-white p-3 rounded bg-secondary-300/40 "><BsStars className="font-bold text-[20px]"/>Integracion de IA</p>
+            <p className="w-[200px] flex gap-3 items-center justify-center border  border-secondary-200/20 text-white p-3 rounded bg-secondary-300/40 "><BsStars className="font-bold text-[20px]"/>Integración de IA</p>
             <h1 className="text-[60px] text-center font-bold "><span className="bg-gradient-to-br from-primary-400 via-primary-100 to-primary-200 text-transparent bg-clip-text">Revoluciona</span> tus formularios con IA</h1>
             <p className="text-center  text-secondary-200 w-[75%]">En nuestra plataforma, te ofrecemos la solución definitiva para optimizar tus formularios mediante el uso de la inteligencia artificial.</p>
 
