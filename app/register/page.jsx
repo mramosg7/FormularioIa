@@ -5,7 +5,7 @@ import {register} from '../lib/actions.js';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link.js';
 import { FaGoogle } from "react-icons/fa";
-import { CorrectArlert, ErrorArlert } from '../ui/alertas.jsx';
+
 import { useEffect, useState } from 'react';
 import { toast, Bounce, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -34,7 +34,7 @@ export default function Register(){
     }, [errorMesagge]);
 
     const handleChange = (e) => {
-        console.log(e.target.value, document.getElementById('password').value)
+      
         if(e.target.value != document.getElementById('password').value){
             setpasswordError(true);
         }else{
