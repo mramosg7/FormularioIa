@@ -42,7 +42,7 @@ model formulario {
   usuarioId   String
   name        String
   description String
-  image       String
+  image       String    @default("formDefault")
   preguntasformulario preguntaformulario[]
   createdAt     DateTime            @default(now())
 }
