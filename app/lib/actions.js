@@ -32,6 +32,7 @@ export async function generateForm(
     const email = formData.get('email');
 
     const id = await getIdUser(email)
+    console.log(id)
     
     const data = await fetchChat(text)
     const idForm = await createForm(data, id)

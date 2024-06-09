@@ -42,7 +42,7 @@ export function Table({formularios}){
     }
 
     const handleClick= (formulario) =>{
-        navigator.clipboard.writeText(`http://localhost:3000/formulario/${formulario.id}`)
+        navigator.clipboard.writeText(`https://formularioia.netlify.app//formulario/${formulario.id}`)
     }
     
     return(

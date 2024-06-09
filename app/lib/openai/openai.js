@@ -22,5 +22,6 @@ export async function fetchChat(input) {
     response_format: { type: "json_object" }
     
   });
+  console.log(completion.choices[0].message.content)
   return completion.choices[0].message.content;
 }
