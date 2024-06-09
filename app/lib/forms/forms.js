@@ -232,23 +232,13 @@ export const updateChanges = async (changes) => {
 
 export async function saveImage(imageData, id){
     try{
-        
-        const imageBuffer = Buffer.from(imageData.replace(/^data:image\/\w+;base64,/, ''), 'base64');
-
-        const imagePath = path.join('/tmp', `${id}.png`);
-        await fs.writeFile(imagePath, imageBuffer, (err) => {
-            if (err) {
-                console.error('Error al guardar la imagen:', err);
-                throw new Error('Error al guardar la imagen');
-            }
-        })
         const prisma =new PrismaClient();
         await prisma.formulario.update({
             where:{
                 id:id
             },
             data:{
-                image:id
+                image:imageData
             }
         })
         return null;

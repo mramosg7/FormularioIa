@@ -85,7 +85,7 @@ export function Table({formularios}){
                             <td className="px-2 py-3 flex">
                                 <div className="flex gap-3 items-center h-[100px]">
                                     <div className="w-[100px] h-[100px]">
-                                            <img className="w-[100px] h-[100px]" src={`/${formulario.image}.png`} alt="formulario" />
+                                            <img className="w-[100px] h-[100px]" src={`data:image/png;base64,${formulario.imageData}`} alt="formulario" />
                                     </div>
                                     <div className="">
                                         <p title={formulario.name} className=" ">{formulario.name}</p>
