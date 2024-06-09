@@ -26,7 +26,7 @@ export async function createForm(formS, userid){
                     descripcion:question.fieldType
                 }
             })
-        
+        console.log('tipo id: ' + tipo.id)
             const newQuestion = await prisma.preguntaformulario.create({
                 data:{
                     formularioId:newForm.id,
@@ -34,7 +34,7 @@ export async function createForm(formS, userid){
                     tipoId:tipo.id
                 }
             })
-
+            console.log('newQuestion id: ' + newQuestion.id)
             if(question.fieldOptions.length > 0){
                 question.fieldOptions.forEach(async (option) => {
                     await prisma.opcionpregunta.create({
