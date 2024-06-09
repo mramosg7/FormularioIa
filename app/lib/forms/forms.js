@@ -18,6 +18,7 @@ export async function createForm(formS, userid){
                 description:form.description,
             }
         })
+        console.log(newForm)
         
         form.questions.forEach(async (question) => {
            
