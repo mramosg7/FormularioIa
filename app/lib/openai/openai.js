@@ -1,6 +1,6 @@
 'use server'
 
-import { content } from "html2canvas/dist/types/css/property-descriptors/content";
+
 import OpenAI from "openai";
 
 
