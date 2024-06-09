@@ -235,8 +235,8 @@ export async function saveImage(imageData, id){
         
         const imageBuffer = Buffer.from(imageData.replace(/^data:image\/\w+;base64,/, ''), 'base64');
 
-        const imagePath = path.join(process.cwd(), 'tmp', `${id}.png`);
-        fs.writeFile(imagePath, imageBuffer, (err) => {
+        const imagePath = path.join('/tmp', `${id}.png`);
+        await fs.writeFile(imagePath, imageBuffer, (err) => {
             if (err) {
                 console.error('Error al guardar la imagen:', err);
                 throw new Error('Error al guardar la imagen');
