@@ -66,7 +66,8 @@ export const { handlers:{GET,POST}, auth, signIn, signOut} = NextAuth({
         }),
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_SECRET_ID
+            clientSecret: process.env.GOOGLE_SECRET_ID,
+            redirectUri: 'https://formularioia.netlify.app'
           })
     ]
 });
